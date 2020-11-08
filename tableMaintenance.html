@@ -1,0 +1,94 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body onload="showRecords()">
+<table>
+<tr>
+<td>Item ID</td>
+<td>:</td>
+<td><input type="text" id="Item_ID" name="Item_ID"</td>
+</tr>
+<br><br>
+<tr>
+<td>Item Description</td>
+<td>:</td>
+<td><input type="text" id="Item_Description" name="Item_Description"</td>
+</tr>
+<br><br>
+<tr>
+<td>Unit Price</td>
+<td>:</td>
+<td><input type="text" id="Unit_Price" name="Unit_Price"</td>
+</tr>
+<br><br>
+<tr>
+<td>Stock Quantity</td>
+<td>:</td>
+<td><input type="text" id="Stock_Quantity" name="Stock_Quantity"</td>
+</tr>
+<br><br>
+<tr>
+<td>Supplier ID</td>
+<td>:</td>
+<td><input type="text" id="Supplier_ID" name="Supplier_ID"</td>
+</tr>
+</table>
+<br>
+<input type="button" value="SAVE" onclick="save()">
+<br><br>
+<div id="details">
+</div>
+<br><br>
+<input type="button" value="Delete" onclick="Delete()">
+<input type="button" value="Edit" onclick="edit()">
+<script>
+function showRecords()
+{
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function()
+{
+if (this.readyState == 4 && this.status == 200)
+{
+document.getElementById("details").innerHTML = this.responseText;
+}
+};
+xhttp.open("GET", "showRecords.jsp", true);
+xhttp.send();
+}
+
+function save()
+{
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function()
+{
+if (this.readyState == 4 && this.status == 200)
+{
+alert(this.responseText);
+showRecords();
+}
+};
+xhttp.open("GET", "rusheelSave.jsp?Item_ID="+document.getElementById("Item_ID").value+"&Item_Description="+document.getElementById("Item_Description").value+"&Unit_Price="+document.getElementById("Unit_Price").value+"&Stock_Quantity="+document.getElementById("Stock_Quantity").value+"&Supplier_ID="+document.getElementById("Supplier_ID").value, true);
+xhttp.send();
+}
+
+
+function delete()
+{
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function()
+{
+if (this.readyState == 4 && this.status == 200)
+{
+document.getElementById("details").innerHTML = this.responseText;
+}
+};
+xhttp.open("GET", "delete.jsp?Item_ID="+document.getElementById("Item_ID").value, true);
+xhttp.send();
+}
+
+</script>
+</body>
+</html>
+
+
